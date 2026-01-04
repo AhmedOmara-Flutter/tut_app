@@ -48,12 +48,12 @@ class ThemeManager {
       ),
       //text
       textTheme: TextTheme(
-        //onboarding headline
+        //onBoarding headline
         headlineLarge: getSemiBoldTextStyle(
           color: ColorManger.darkGray,
           fontSize: FontSizeManager.s16,
         ),
-        //onboarding subHeadline
+        //onBoarding subHeadline
         headlineMedium: getMediumTextStyle(
           color: ColorManger.darkGray,
           fontSize: FontSizeManager.s14,
