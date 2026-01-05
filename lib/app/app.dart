@@ -3,9 +3,7 @@ import '../presentation/resources/routes_manager.dart';
 import '../presentation/resources/theme_manager.dart';
 
 class MyApp extends StatelessWidget {
-  MyApp._internal(); //named Constructor
-
-  int appState = 0;
+  const MyApp._internal(); //named Constructor
 
   static final _instance = MyApp._internal();
 

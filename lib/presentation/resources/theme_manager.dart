@@ -4,7 +4,6 @@ import 'package:tut_app/presentation/resources/values_manager.dart';
 import 'color_manger.dart';
 import 'font_manager.dart';
 
-
 class ThemeManager {
   static ThemeData getThemeDataApplication() {
     return ThemeData(
