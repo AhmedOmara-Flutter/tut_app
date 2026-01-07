@@ -53,12 +53,17 @@ class ThemeManager {
           fontSize: FontSizeManager.s16,
         ),
         //onBoarding subHeadline
-        headlineMedium: getMediumTextStyle(
+        headlineMedium: getRegularTextStyle(
           color: ColorManger.darkGray,
           fontSize: FontSizeManager.s14,
         ),
+        //skip
+        titleLarge: getMediumTextStyle(
+          color: ColorManger.primary,
+          fontSize: AppSizeManager.s16,
+        ),
         //body
-        headlineSmall: getRegularTextStyle(
+        bodyLarge: getRegularTextStyle(
           color: ColorManger.lightGrey,
           fontSize: FontSizeManager.s14,
         ),

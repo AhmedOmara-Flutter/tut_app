@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tut_app/presentation/onBoarding/onBoarding_view.dart';
+import 'package:tut_app/presentation/onBoarding/view/onBoarding_view.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
 import '../auth/forget_password/forget_password_view.dart';
 import '../auth/login/login_view.dart';
