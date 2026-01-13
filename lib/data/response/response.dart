@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'response.g.dart';
+
 @JsonSerializable()
 class BaseResponse {
   @JsonKey(name: "status")
@@ -18,11 +20,11 @@ class CustomerResponse {
   int? numOfNotifications;
 
   CustomerResponse({this.id, this.name, this.numOfNotifications});
-  factory CustomerResponse.fromJson(Map<String,dynamic>json)=>_$CustomerResponseFromJson(json);
 
-  Map<String,dynamic>toJson()=>_$CustomerResponseToJson(this);
+  factory CustomerResponse.fromJson(Map<String, dynamic> json) =>
+      _$CustomerResponseFromJson(json);
 
-
+  Map<String, dynamic> toJson() => _$CustomerResponseToJson(this);
 }
 
 @JsonSerializable()
@@ -36,9 +38,10 @@ class ContactsResponse {
 
   ContactsResponse({this.phone, this.email, this.link});
 
-  factory ContactsResponse.fromJson(Map<String,dynamic>json)=>_$ContactsResponseFromJson(json);
+  factory ContactsResponse.fromJson(Map<String, dynamic> json) =>
+      _$ContactsResponseFromJson(json);
 
-  Map<String,dynamic>toJson()=>_$ContactsResponseToJson(this);
+  Map<String, dynamic> toJson() => _$ContactsResponseToJson(this);
 }
 
 @JsonSerializable()
@@ -50,11 +53,10 @@ class AuthenticationResponse extends BaseResponse {
 
   AuthenticationResponse({this.customer, this.contacts});
 
-  factory AuthenticationResponse.fromJson(Map<String,dynamic>json)=>_$AuthenticationResponseFromJson(json);
+  factory AuthenticationResponse.fromJson(Map<String, dynamic> json) =>
+      _$AuthenticationResponseFromJson(json);
 
-  Map<String,dynamic>toJson()=>_$AuthenticationResponseToJson(this);
+  Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
 }
-
-
 
 //dart run build_runner build --delete-conflicting-outputs
