@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tut_app/presentation/onBoarding/view_model/onBoarding_view_model.dart';
 import 'package:tut_app/presentation/resources/assets_manager.dart';
 import 'package:tut_app/presentation/resources/color_manger.dart';
 import 'package:tut_app/presentation/resources/constants_manager.dart';
@@ -6,6 +7,7 @@ import 'package:tut_app/presentation/resources/routes_manager.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
 import 'package:tut_app/presentation/resources/style_manager.dart';
 import 'package:tut_app/presentation/resources/values_manager.dart';
+import '../../../domain/models.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});
@@ -16,42 +18,38 @@ class OnBoardingView extends StatefulWidget {
 
 class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController _pageController = PageController();
-  int currentIndex = 0;
+  final OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
-  final List<SliderObject> _list = _getSliderData();
+  void _bind() {
+    _viewModel.start();
+  }
 
-  static List<SliderObject> _getSliderData() => [
-    SliderObject(
-      title1: StringManager.onBoardingTitle1,
-      title2: StringManager.onBoardingSubTitle1,
-      image: ImageAssets.onBoardingLogo1,
-    ),
-    SliderObject(
-      title1: StringManager.onBoardingTitle2,
-      title2: StringManager.onBoardingSubTitle2,
-      image: ImageAssets.onBoardingLogo2,
-    ),
-    SliderObject(
-      title1: StringManager.onBoardingTitle3,
-      title2: StringManager.onBoardingSubTitle3,
-      image: ImageAssets.onBoardingLogo3,
-    ),
-    SliderObject(
-      title1: StringManager.onBoardingTitle4,
-      title2: StringManager.onBoardingSubTitle4,
-      image: ImageAssets.onBoardingLogo4,
-    ),
-  ];
+  @override
+  void initState() {
+    _bind();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: _viewModel.outPutSliderObject,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return getContentWidget(snapshot.data!);
+        }
+        return Scaffold(
+          body: Center(child: Text(StringManager.somethingWentWrong)),
+        );
+      },
+    );
+  }
+
+  Widget getContentWidget(SliderViewObject sliderViewObject) {
     return Scaffold(
       bottomSheet: Container(
         color: ColorManger.white,
-       // height: AppSizeManager.s120,
         child: Column(
-          //todo  height انا هنا حذفت
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
@@ -74,25 +72,23 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 ),
               ),
             ),
-            _getBottomSheetWidget(),
+            _getBottomSheetWidget(sliderViewObject),
           ],
         ),
       ),
       body: PageView.builder(
         itemBuilder: (context, index) =>
-            OnBoardingObject(sliderObject: _list[index] ),
+            OnBoardingObject(sliderObject: sliderViewObject.sliderObject),
         controller: _pageController,
         onPageChanged: (index) {
-          setState(() {
-            currentIndex = index;
-          });
+          _viewModel.onPageChanged(index);
         },
-        itemCount: _list.length,
+        itemCount: sliderViewObject.numOfSlides,
       ),
     );
   }
 
-  Widget _getBottomSheetWidget() {
+  Widget _getBottomSheetWidget(SliderViewObject sliderViewObject) {
     return Container(
       height: AppSizeManager.s70,
       color: ColorManger.primary,
@@ -102,7 +98,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           GestureDetector(
             onTap: () {
               _pageController.animateToPage(
-                _getPreviousIndex(),
+                _viewModel.goPrevious(),
                 duration: Duration(
                   microseconds: AppConstants.sliderAnimationTime,
                 ),
@@ -120,17 +116,17 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           ),
           Row(
             children: [
-              for (int i = 0; i < _list.length; i++)
+              for (int i = 0; i < sliderViewObject.numOfSlides; i++)
                 Padding(
                   padding: const EdgeInsets.all(AppPaddingManager.p8),
-                  child: _getProperCircle(i),
+                  child: _getProperCircle(i, sliderViewObject.currentIndex),
                 ),
             ],
           ),
           GestureDetector(
             onTap: () {
               _pageController.animateToPage(
-                _getNextIndex(),
+                _viewModel.goNext(),
                 duration: Duration(
                   microseconds: AppConstants.sliderAnimationTime,
                 ),
@@ -151,7 +147,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     );
   }
 
-  Widget _getProperCircle(int index) {
+  Widget _getProperCircle(int index, int currentIndex) {
     if (index == currentIndex) {
       return Icon(
         Icons.circle_outlined,
@@ -167,23 +163,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     }
   }
 
-  int _getPreviousIndex() {
-    //todo خلي يالك انا عملت -- قبل عشان مطغطش مرتين عشان يروح للزرار الي بعده انا كده بقوله اطرح واستخدمه دلوقتي
-    int previousIndex = --currentIndex;
-    if (previousIndex == -1) {
-      return _list.length - 1;
-    } else {
-      return previousIndex;
-    }
-  }
-  int _getNextIndex() {
-    //todo
-    int nextIndex = ++currentIndex;
-    if (nextIndex == _list.length) {
-      return nextIndex=0;
-    } else {
-      return nextIndex;
-    }
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
   }
 }
 
@@ -218,16 +201,4 @@ class OnBoardingObject extends StatelessWidget {
       ],
     );
   }
-}
-
-class SliderObject {
-  final String title1;
-  final String title2;
-  final String image;
-
-  SliderObject({
-    required this.title1,
-    required this.title2,
-    required this.image,
-  });
 }
