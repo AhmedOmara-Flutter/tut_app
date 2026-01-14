@@ -7,7 +7,7 @@ import 'package:tut_app/presentation/resources/routes_manager.dart';
 import 'package:tut_app/presentation/resources/string_manager.dart';
 import 'package:tut_app/presentation/resources/style_manager.dart';
 import 'package:tut_app/presentation/resources/values_manager.dart';
-import '../../../domain/models.dart';
+import '../../../domain/model/models.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});
