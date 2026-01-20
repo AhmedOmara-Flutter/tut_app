@@ -37,7 +37,7 @@ class RepositoryImpl implements Repository {
       }
     } else {
       //return failure
-      return Left(DataSource.INTERNAL_SERVER_ERROR.getFailure());
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 }

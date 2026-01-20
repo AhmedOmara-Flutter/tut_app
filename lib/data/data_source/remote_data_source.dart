@@ -2,7 +2,6 @@ import 'package:tut_app/data/network/requests.dart';
 import 'package:tut_app/data/response/response.dart';
 import '../network/app_api.dart';
 
-//todo محنا ممكن نعرف الكلاس عادي من غيره abstract class ليه احنا عملنا
 abstract class RemoteDataSource {
   Future<AuthenticationResponse> login(LoginRequest loginRequest);
 }
