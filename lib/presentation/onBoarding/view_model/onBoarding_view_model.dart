@@ -6,7 +6,7 @@ import '../../resources/assets_manager.dart';
 import '../../resources/string_manager.dart';
 
 class OnBoardingViewModel extends BaseViewModel
-    with BaseViewModelInputs, BaseViewModelOutputs {
+    with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {
   final StreamController _streamController = StreamController();
   int currentIndex = 0;
 
@@ -82,7 +82,7 @@ class OnBoardingViewModel extends BaseViewModel
   ];
 
   void postDataToView() {
-    _streamController.add(
+    inputSliderObject.add(
       SliderViewObject(
         sliderObject: _list[currentIndex],
         currentIndex: currentIndex,
@@ -92,7 +92,7 @@ class OnBoardingViewModel extends BaseViewModel
   }
 }
 
-mixin BaseViewModelInputs {
+mixin OnBoardingViewModelInputs {
   int goNext();
 
   int goPrevious();
@@ -102,6 +102,6 @@ mixin BaseViewModelInputs {
   Sink get inputSliderObject;
 }
 
-mixin BaseViewModelOutputs {
+mixin OnBoardingViewModelOutputs {
   Stream<SliderViewObject> get outPutSliderObject;
 }
