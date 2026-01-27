@@ -6,8 +6,6 @@ import '../model/models.dart';
 import 'base_usecase.dart';
 
 class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication> {
-
-
   final Repository _repository;
 
   LoginUseCase(this._repository);
@@ -16,10 +14,7 @@ class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication> {
   Future<Either<Failure, Authentication>> execute(
       LoginUseCaseInput input) async {
     return await _repository.login(
-      LoginRequest(
-        email: input.email,
-        password: input.password,
-      ),
+      LoginRequest(email: input.email, password: input.password),
     );
   }
 }

@@ -62,6 +62,11 @@ class ThemeManager {
           color: ColorManger.primary,
           fontSize: AppSizeManager.s16,
         ),
+        //text under login
+        titleSmall: getMediumTextStyle(
+          color: ColorManger.primary,
+          fontSize: AppSizeManager.s14,
+        ),
         //body
         bodyLarge: getRegularTextStyle(
           color: ColorManger.lightGrey,
@@ -70,31 +75,31 @@ class ThemeManager {
       ),
       //input decoration
       inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.all(AppPaddingManager.p12),
+        contentPadding: EdgeInsets.all(AppPaddingManager.p20),
         labelStyle: getRegularTextStyle(
           color: ColorManger.grey,
-          fontSize: FontSizeManager.s14,
+          fontSize: FontSizeManager.s16,
         ),
         hintStyle: getRegularTextStyle(
           color: ColorManger.grey,
-          fontSize: FontSizeManager.s14,
+          fontSize: FontSizeManager.s16,
         ),
         errorStyle: getRegularTextStyle(color: ColorManger.error),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorManger.grey),
-          borderRadius: BorderRadius.circular(AppSizeManager.s8),
+          borderSide: BorderSide(color: ColorManger.lightGrey),
+          borderRadius: BorderRadius.circular(AppSizeManager.s12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: ColorManger.grey),
-          borderRadius: BorderRadius.circular(AppSizeManager.s8),
+          borderSide: BorderSide(color: ColorManger.primary),
+          borderRadius: BorderRadius.circular(AppSizeManager.s12),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: ColorManger.grey),
-          borderRadius: BorderRadius.circular(AppSizeManager.s8),
+          borderRadius: BorderRadius.circular(AppSizeManager.s12),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: ColorManger.primary),
-          borderRadius: BorderRadius.circular(AppSizeManager.s8),
+          borderRadius: BorderRadius.circular(AppSizeManager.s12),
         ),
       ),
     );

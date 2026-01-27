@@ -32,6 +32,7 @@ dependencies:
   internet_connection_checker: ^3.0.1
   pretty_dio_logger: ^1.4.0
   freezed_annotation: any
+  get_it: ^9.2.0
 
 
 

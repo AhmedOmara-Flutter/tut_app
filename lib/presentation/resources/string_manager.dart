@@ -17,4 +17,11 @@ class StringManager {
       'Tut app is an awesome flutter application\nusing clean architecture #4';
 
   static const String skip = 'Skip';
+  static const String password = 'Password';
+  static const String userName = 'UserName';
+  static const String userNameError = "UserName required";
+  static const String passwordError = "Password required";
+  static const String login = 'Login';
+  static const String forgetPassword = 'Forget Password';
+  static const String notAMember = 'Not A member ? Sign up';
 }
