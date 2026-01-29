@@ -12,4 +12,5 @@ class ColorManger {
   static const Color grey3 = Color(0xff304654);
   static const Color white = Color(0xffFFFFFF);
   static const Color error = Color(0xffe61f34);
+  static const Color black = Color(0xff000000);
 }

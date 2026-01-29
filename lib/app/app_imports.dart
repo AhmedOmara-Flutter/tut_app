@@ -51,4 +51,5 @@ export 'package:tut_app/presentation/auth/register/register_view.dart';
 export 'package:tut_app/presentation/main/main_view.dart';
 export 'package:tut_app/presentation/splash/splash_view.dart';
 export 'package:tut_app/presentation/resources/font_manager.dart';
+export 'package:lottie/lottie.dart';
 export 'dart:async';

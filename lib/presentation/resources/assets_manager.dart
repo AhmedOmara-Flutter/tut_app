@@ -7,3 +7,12 @@ class ImageAssets {
   static const String onBoardingLogo3 = '$_imagePath/onBoardingLogo3.png';
   static const String onBoardingLogo4 = '$_imagePath/onBoardingLogo4.png';
 }
+
+class JsonAssets{
+  static const String _jsonPath = 'assets/json';
+  static const String empty = '$_jsonPath/empty.json';
+  static const String loading = '$_jsonPath/loading.json';
+  static const String error = '$_jsonPath/error.json';
+  static const String success = '$_jsonPath/success.json';
+
+}
