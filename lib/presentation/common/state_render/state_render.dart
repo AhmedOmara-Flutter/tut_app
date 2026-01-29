@@ -18,7 +18,7 @@ class StateRender extends StatelessWidget {
   final StateRenderType stateRenderType;
   final String message;
   final String title;
-  final Function retryActionFunction;
+  final VoidCallback retryActionFunction;
 
   const StateRender({
     super.key,
@@ -30,34 +30,79 @@ class StateRender extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getContentWidget();
+    return getStateWidget(context);
   }
 
-  Widget getContentWidget() {
+  Widget getStateWidget(BuildContext context) {
     switch (stateRenderType) {
+      // Full Screen Loading
       case StateRenderType.fullScreenLoadingState:
         return getColumnState([
-          getContentImage(JsonAssets.loading),
+          getAnimatedImage(JsonAssets.loading),
           getContentTitle('Loading...'),
         ]);
+
+      // Full Screen Error
       case StateRenderType.fullScreenErrorState:
         return getColumnState([
-          getContentImage(JsonAssets.error),
+          getAnimatedImage(JsonAssets.error),
           getContentMessage('Something went wrong. Try again later!.'),
-          getContentButton('Retry Again'),
+          getRetryButton('Retry Again', context),
         ]);
+
+      // Full Screen Empty
       case StateRenderType.fullScreenEmptyState:
         return getColumnState([
-          getContentImage(JsonAssets.empty),
+          getAnimatedImage(JsonAssets.empty),
           getContentTitle('No Data'),
         ]);
+
+      // Pop Up Loading
+      case StateRenderType.popUpLoadingState:
+        return _getPopUpDialog(context,[
+          getAnimatedImage(JsonAssets.loading),
+          getContentTitle('Loading...'),
+        ]);
+
+      // Pop Up Error
+      case StateRenderType.popUpErrorState:
+        return _getPopUpDialog(context,[
+          getAnimatedImage(JsonAssets.error),
+          getContentMessage('Something went wrong. Try again later!.'),
+          getRetryButton('Ok', context),
+        ]);
+
       case StateRenderType.contentState:
         return Container();
-      case StateRenderType.popUpLoadingState:
-        return Container();
-      case StateRenderType.popUpErrorState:
-        return Container();
     }
+  }
+  Widget _getPopUpDialog(BuildContext context,List<Widget>children) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppSizeManager.s14),
+      ),
+      elevation: AppSizeManager.s1_5,
+      backgroundColor: Colors.transparent,
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorManger.white,
+          borderRadius: BorderRadius.circular(AppSizeManager.s14),
+          boxShadow: const [
+            BoxShadow(color: Colors.black26),
+          ],
+        ),
+        child: getDialogContent(context,children),
+      ),
+    );
+  }
+
+  Widget getDialogContent(BuildContext context,List<Widget>children) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: children,
+    );
   }
 
   Widget getColumnState(List<Widget> children) {
@@ -68,7 +113,7 @@ class StateRender extends StatelessWidget {
     );
   }
 
-  Widget getContentImage(String lottieImage) {
+  Widget getAnimatedImage(String lottieImage) {
     return Lottie.asset(lottieImage);
   }
 
@@ -80,7 +125,17 @@ class StateRender extends StatelessWidget {
     return Text(title, style: getRegularTextStyle(color: ColorManger.black));
   }
 
-  Widget getContentButton(String title) {
-    return ElevatedButton(onPressed: () {}, child: Text(title));
+  Widget getRetryButton(String title, BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        if (stateRenderType == StateRenderType.fullScreenErrorState) {
+          retryActionFunction.call();
+        } else {
+          Navigator.pop(context);
+        }
+      },
+      child: Text(title),
+    );
   }
+
 }

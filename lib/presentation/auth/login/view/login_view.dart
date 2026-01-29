@@ -30,6 +30,7 @@ class _LoginViewState extends State<LoginView> {
     // TODO: implement initState
     _bind();
     super.initState();
+
   }
 
   @override
@@ -90,6 +91,10 @@ class _LoginViewState extends State<LoginView> {
                           ? () {
                               if (_formKey.currentState!.validate()) {
                                 _viewModel.login();
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  RoutesManager.mainRoute,
+                                );
                               }
                             }
                           : null,
