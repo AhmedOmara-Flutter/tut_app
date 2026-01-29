@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:tut_app/app/app_imports.dart';
 
 class ColorManger {
   static const Color darkPrimary = Color(0xffd17d11);

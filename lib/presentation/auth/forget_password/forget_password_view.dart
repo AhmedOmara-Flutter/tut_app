@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:tut_app/app/app_imports.dart';
 
 class ForgetPasswordView extends StatelessWidget {
   const ForgetPasswordView({super.key});

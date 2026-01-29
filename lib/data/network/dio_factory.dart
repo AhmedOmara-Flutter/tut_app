@@ -1,7 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import '../../app/constants.dart';
+import 'package:tut_app/app/app_imports.dart';
 
 class DioFactory {
   Future<Dio> getDio() async {

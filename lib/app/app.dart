@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import '../presentation/resources/routes_manager.dart';
-import '../presentation/resources/theme_manager.dart';
+import 'package:tut_app/app/app_imports.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp._internal(); //named Constructor
+  const MyApp._internal();
 
   static final _instance = MyApp._internal();
 

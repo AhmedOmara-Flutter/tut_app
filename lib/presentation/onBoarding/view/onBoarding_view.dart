@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:tut_app/presentation/onBoarding/view_model/onBoarding_view_model.dart';
-import 'package:tut_app/presentation/resources/assets_manager.dart';
-import 'package:tut_app/presentation/resources/color_manger.dart';
-import 'package:tut_app/presentation/resources/constants_manager.dart';
-import 'package:tut_app/presentation/resources/routes_manager.dart';
-import 'package:tut_app/presentation/resources/string_manager.dart';
-import 'package:tut_app/presentation/resources/style_manager.dart';
-import 'package:tut_app/presentation/resources/values_manager.dart';
-import '../../../domain/model/models.dart';
+import 'package:tut_app/app/app_imports.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({super.key});

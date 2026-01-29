@@ -1,7 +1,7 @@
 import 'package:tut_app/app/app_imports.dart';
 
-class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
+class StateRender extends StatelessWidget {
+  const StateRender({super.key});
 
   @override
   Widget build(BuildContext context) {

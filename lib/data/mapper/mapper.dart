@@ -1,6 +1,4 @@
-import 'package:tut_app/app/extension.dart';
-import 'package:tut_app/domain/model/models.dart';
-import '../response/response.dart';
+import 'package:tut_app/app/app_imports.dart';
 
 extension CustomerResponseMapper on CustomerResponse? {
   Customer toDomain() {

@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:tut_app/app/app_imports.dart';
 
 class FontFamilyManager {
   static const String fontFamily = 'Montserrat';

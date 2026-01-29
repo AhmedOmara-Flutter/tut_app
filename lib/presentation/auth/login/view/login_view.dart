@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:tut_app/app/di.dart';
-import 'package:tut_app/presentation/auth/login/view_model/login_view_model.dart';
-import 'package:tut_app/presentation/resources/assets_manager.dart';
-import 'package:tut_app/presentation/resources/values_manager.dart';
-import '../../../resources/string_manager.dart';
+import 'package:tut_app/app/app_imports.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});

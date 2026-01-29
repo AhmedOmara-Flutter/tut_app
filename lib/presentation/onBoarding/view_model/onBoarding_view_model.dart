@@ -1,9 +1,5 @@
-import 'dart:async';
+import 'package:tut_app/app/app_imports.dart';
 
-import '../../../domain/model/models.dart';
-import '../../base/base_view_model.dart';
-import '../../resources/assets_manager.dart';
-import '../../resources/string_manager.dart';
 
 class OnBoardingViewModel extends BaseViewModel
     with OnBoardingViewModelInputs, OnBoardingViewModelOutputs {

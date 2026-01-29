@@ -1,7 +1,4 @@
-import 'package:tut_app/domain/usecase/login_usecase.dart';
-import 'package:tut_app/presentation/base/base_view_model.dart';
-import '../../../common/freezed_data_classes.dart';
-import 'dart:async';
+import 'package:tut_app/app/app_imports.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInput, LoginViewModelOutputs {
@@ -31,12 +28,12 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void login() async {
-    // (await _loginUseCase.execute(
-    //   LoginUseCaseInput(
-    //     email: loginObject.userName,
-    //     password: loginObject.password,
-    //   ),
-    // )).fold((failure) {}, (data) {});
+    (await _loginUseCase.execute(
+      LoginUseCaseInput(
+        email: loginObject.userName,
+        password: loginObject.password,
+      ),
+    )).fold((failure) {}, (data) {});
   }
 
   @override

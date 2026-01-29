@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:tut_app/data/network/failure.dart';
+import 'package:tut_app/app/app_imports.dart';
 
 class ErrorHandler implements Exception {
   late Failure failure;
@@ -193,7 +192,6 @@ extension DataSourceExtension on DataSource {
     }
   }
 }
-
 
 class ApiInternalStatus {
   static const int SUCCESS = 0;

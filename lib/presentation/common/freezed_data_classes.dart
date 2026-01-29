@@ -1,5 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
+import 'package:tut_app/app/app_imports.dart';
 part 'freezed_data_classes.freezed.dart';
 
 @freezed
