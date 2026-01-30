@@ -30,12 +30,26 @@ class _LoginViewState extends State<LoginView> {
     // TODO: implement initState
     _bind();
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
-    return getContentWidget();
+    return StreamBuilder(
+      stream: _viewModel.outputState,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return snapshot.data!.flowStateWidget(
+            context,
+            () {
+              print('retry');
+            },
+            getContentWidget(),
+          );
+        } else {
+          return getContentWidget();
+        }
+      },
+    );
   }
 
   Widget getContentWidget() {

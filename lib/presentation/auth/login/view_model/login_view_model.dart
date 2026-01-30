@@ -1,10 +1,11 @@
 import 'package:tut_app/app/app_imports.dart';
+import 'package:tut_app/presentation/common/state_render/state_render.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInput, LoginViewModelOutputs {
   final LoginUseCase _loginUseCase;
-  LoginViewModel(this._loginUseCase);
 
+  LoginViewModel(this._loginUseCase);
 
   final StreamController _userNameStreamController =
       StreamController<String>.broadcast();
@@ -17,10 +18,13 @@ class LoginViewModel extends BaseViewModel
 
   // inputs Functions
   @override
-  void start() {}
+  void start() {
+    inputState.add(ContentState());
+  }
 
   @override
   void dispose() {
+    super.dispose();
     _userNameStreamController.close();
     _passwordStreamController.close();
     _allInputsValidStreamController.close();
@@ -28,12 +32,22 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void login() async {
+    inputState.add(
+      LoadingState(stateRenderType: StateRenderType.popUpLoadingState),
+    );
     (await _loginUseCase.execute(
       LoginUseCaseInput(
         email: loginObject.userName,
         password: loginObject.password,
       ),
-    )).fold((failure) {}, (data) {});
+    )).fold((failure) {
+      inputState.add(ErrorState(
+        StateRenderType.popUpErrorState,
+        failure.message,
+      ));
+    }, (data) {
+      inputState.add(ContentState());
+    });
   }
 
   @override

@@ -18,7 +18,7 @@ class StateRender extends StatelessWidget {
   final StateRenderType stateRenderType;
   final String message;
   final String title;
-  final VoidCallback retryActionFunction;
+  final Function retryActionFunction;
 
   const StateRender({
     super.key,
