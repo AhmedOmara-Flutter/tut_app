@@ -23,26 +23,33 @@ class _LoginViewState extends State<LoginView> {
     _passwordController.addListener(() {
       _viewModel.setPassword(_passwordController.text);
     });
+    _viewModel.userLoggedInSuccessfullyStreamController.stream.listen((
+      isLoggedIn,
+    ) {
+      if (isLoggedIn) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          instance<AppPreferences>().setLoginKey();
+          Navigator.of(context).pushReplacementNamed(RoutesManager.mainRoute);
+        });
+      }
+    });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     _bind();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<FlowState>(
       stream: _viewModel.outputState,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return snapshot.data!.flowStateWidget(
             context,
-            () {
-              print('retry');
-            },
+            () {},
             getContentWidget(),
           );
         } else {
@@ -81,7 +88,7 @@ class _LoginViewState extends State<LoginView> {
                     );
                   },
                 ),
-                SizedBox(height: AppSizeManager.s20),
+                SizedBox(height: AppSizeManager.s16),
                 StreamBuilder(
                   stream: _viewModel.outPutPasswordValid,
                   builder: (context, snapshot) {
@@ -96,7 +103,7 @@ class _LoginViewState extends State<LoginView> {
                     );
                   },
                 ),
-                SizedBox(height: AppSizeManager.s50),
+                SizedBox(height: AppSizeManager.s45),
                 StreamBuilder(
                   stream: _viewModel.allInputsValidOutputs,
                   builder: (context, snapshot) {
@@ -105,10 +112,6 @@ class _LoginViewState extends State<LoginView> {
                           ? () {
                               if (_formKey.currentState!.validate()) {
                                 _viewModel.login();
-                                Navigator.pushReplacementNamed(
-                                  context,
-                                  RoutesManager.mainRoute,
-                                );
                               }
                             }
                           : null,
@@ -119,7 +122,7 @@ class _LoginViewState extends State<LoginView> {
                     );
                   },
                 ),
-                SizedBox(height: AppSizeManager.s20),
+                SizedBox(height: AppSizeManager.s16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -127,9 +130,25 @@ class _LoginViewState extends State<LoginView> {
                       StringManager.forgetPassword,
                       style: TextTheme.of(context).titleSmall,
                     ),
-                    Text(
-                      StringManager.notAMember,
-                      style: TextTheme.of(context).titleSmall,
+                    Row(
+                      children: [
+                        Text(
+                          StringManager.notAMember,
+                          style: TextTheme.of(context).titleSmall,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              RoutesManager.registerRoute,
+                            );
+                          },
+                          child: Text(
+                            StringManager.signUp,
+                            style: TextTheme.of(context).titleSmall,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -143,7 +162,6 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _viewModel.dispose();
     _usernameController.dispose();
     _passwordController.dispose();

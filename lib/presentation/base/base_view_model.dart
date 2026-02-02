@@ -10,12 +10,10 @@ abstract class BaseViewModel with BaseViewModelInputs, BaseViewModelOutputs {
   }
 
   @override
-  Sink<dynamic> get inputState => _inputStreamBuilder.sink;
+  Sink get inputState => _inputStreamBuilder.sink;
 
   @override
-  Stream<FlowState> get outputState => _inputStreamBuilder.stream.map((state) {
-    return state;
-  });
+  Stream<FlowState> get outputState => _inputStreamBuilder.stream.map((event)=>event);
 }
 
 mixin BaseViewModelInputs {

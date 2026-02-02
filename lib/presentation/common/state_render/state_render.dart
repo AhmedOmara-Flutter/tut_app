@@ -60,8 +60,10 @@ class StateRender extends StatelessWidget {
       // Pop Up Loading
       case StateRenderType.popUpLoadingState:
         return _getPopUpDialog(context,[
+          SizedBox(height: AppSizeManager.s8,),
           getAnimatedImage(JsonAssets.loading),
-          getContentTitle('Loading...'),
+          SizedBox(height: AppSizeManager.s8,)
+
         ]);
 
       // Pop Up Error
@@ -114,7 +116,7 @@ class StateRender extends StatelessWidget {
   }
 
   Widget getAnimatedImage(String lottieImage) {
-    return Lottie.asset(lottieImage);
+    return Lottie.asset(lottieImage,height: AppSizeManager.s120,width: AppSizeManager.s120);
   }
 
   Widget getContentTitle(String title) {
@@ -126,15 +128,19 @@ class StateRender extends StatelessWidget {
   }
 
   Widget getRetryButton(String title, BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        if (stateRenderType == StateRenderType.fullScreenErrorState) {
-          retryActionFunction.call();
-        } else {
-          Navigator.pop(context);
-        }
-      },
-      child: Text(title),
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: AppMarginManager.m20,vertical: AppMarginManager.m8),
+      child: ElevatedButton(
+        onPressed: () {
+          if (stateRenderType == StateRenderType.fullScreenErrorState) {
+            retryActionFunction.call();
+          } else {
+            Navigator.of(context,rootNavigator: true).pop(true);
+          }
+        },
+        child: Text(title),
+      ),
     );
   }
 

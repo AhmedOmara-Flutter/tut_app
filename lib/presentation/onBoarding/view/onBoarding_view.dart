@@ -12,6 +12,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
 
   void _bind() {
+    instance<AppPreferences>().setOnBoardingKey();
     _viewModel.start();
   }
 

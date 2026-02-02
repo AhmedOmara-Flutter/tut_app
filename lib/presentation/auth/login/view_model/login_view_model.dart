@@ -1,5 +1,4 @@
 import 'package:tut_app/app/app_imports.dart';
-import 'package:tut_app/presentation/common/state_render/state_render.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInput, LoginViewModelOutputs {
@@ -14,6 +13,9 @@ class LoginViewModel extends BaseViewModel
   final StreamController _allInputsValidStreamController =
       StreamController<void>.broadcast();
 
+  final StreamController userLoggedInSuccessfullyStreamController =
+      StreamController<bool>();
+
   var loginObject = LoginObject(userName: '', password: '');
 
   // inputs Functions
@@ -24,10 +26,12 @@ class LoginViewModel extends BaseViewModel
 
   @override
   void dispose() {
-    super.dispose();
     _userNameStreamController.close();
     _passwordStreamController.close();
     _allInputsValidStreamController.close();
+    userLoggedInSuccessfullyStreamController.close();
+    super.dispose();
+
   }
 
   @override
@@ -40,14 +44,17 @@ class LoginViewModel extends BaseViewModel
         email: loginObject.userName,
         password: loginObject.password,
       ),
-    )).fold((failure) {
-      inputState.add(ErrorState(
-        StateRenderType.popUpErrorState,
-        failure.message,
-      ));
-    }, (data) {
-      inputState.add(ContentState());
-    });
+    )).fold(
+      (failure) {
+        inputState.add(
+          ErrorState(StateRenderType.popUpErrorState, failure.message),
+        );
+      },
+      (data) {
+        inputState.add(ContentState());
+        userLoggedInSuccessfullyStreamController.add(true);
+      },
+    );
   }
 
   @override

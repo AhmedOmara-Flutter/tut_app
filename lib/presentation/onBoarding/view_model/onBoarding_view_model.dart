@@ -21,7 +21,6 @@ class OnBoardingViewModel extends BaseViewModel
 
   @override
   int goNext() {
-    // TODO: implement goNext
     int nextIndex = ++currentIndex;
     if (nextIndex == _list.length) {
       return nextIndex = 0;

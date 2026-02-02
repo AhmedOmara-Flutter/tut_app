@@ -7,12 +7,17 @@ export 'package:pretty_dio_logger/pretty_dio_logger.dart';
 export 'package:json_annotation/json_annotation.dart';
 export 'package:lottie/lottie.dart';
 export 'dart:async';
+export 'package:flutter/scheduler.dart';
+export 'package:shared_preferences/shared_preferences.dart';
+
 
 /// app
 export 'package:tut_app/app/app.dart';
 export 'package:tut_app/app/di.dart';
 export 'package:tut_app/app/constants.dart';
 export 'package:tut_app/app/extension.dart';
+export 'package:tut_app/app/app_prefs.dart';
+
 
 /// data
 export 'package:tut_app/data/network/app_api.dart';
@@ -49,8 +54,11 @@ export 'package:tut_app/presentation/resources/style_manager.dart';
 export 'package:tut_app/presentation/onBoarding/view/onBoarding_view.dart';
 export 'package:tut_app/presentation/auth/forget_password/forget_password_view.dart';
 export 'package:tut_app/presentation/auth/login/view/login_view.dart';
-export 'package:tut_app/presentation/auth/register/register_view.dart';
+export 'package:tut_app/presentation/auth/register/view/register_view.dart';
 export 'package:tut_app/presentation/main/main_view.dart';
 export 'package:tut_app/presentation/splash/splash_view.dart';
 export 'package:tut_app/presentation/resources/font_manager.dart';
 export 'package:tut_app/presentation/common/state_render/state_render_impl.dart';
+export 'package:tut_app/presentation/common/state_render/state_render.dart';
+export 'package:tut_app/presentation/auth/register/view_model/register_view_model.dart';
+

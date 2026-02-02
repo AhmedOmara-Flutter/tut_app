@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:tut_app/presentation/common/state_render/state_render.dart';
+import 'package:tut_app/app/app_imports.dart';
 
 abstract class FlowState {
   StateRenderType stateRenderTypeFun();
@@ -151,7 +149,7 @@ extension FlowStateExtension on FlowState {
 
   void dismissDialog(BuildContext context) {
     if (_isCurrentDialogShowing(context)) {
-      Navigator.pop(context);
+      Navigator.of(context, rootNavigator: true).pop(true);
     }
   }
 }

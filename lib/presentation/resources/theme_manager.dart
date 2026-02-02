@@ -71,7 +71,7 @@ class ThemeManager {
       ),
       //input decoration
       inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.all(AppPaddingManager.p20),
+        contentPadding: EdgeInsets.all(AppPaddingManager.p18),
         labelStyle: getRegularTextStyle(
           color: ColorManger.grey,
           fontSize: FontSizeManager.s16,
