@@ -1,5 +1,6 @@
 import 'package:tut_app/app/app_imports.dart';
 
+
 final instance = GetIt.instance;
 
 Future<void> initAppModule() async {
@@ -40,8 +41,8 @@ void initLoginModule() {
 }
 
 void initRegisterModule(){
-  //todo implement the following register code
-  if(GetIt.I.isRegistered()){
-    instance.registerFactory<RegisterViewModel>(()=>RegisterViewModel());
+  if(!GetIt.I.isRegistered<RegisterUsecase>()){
+    instance.registerCachedFactory<RegisterUsecase>(()=>RegisterUsecase(instance()));
+    instance.registerFactory<RegisterViewModel>(()=>RegisterViewModel(instance()));
   }
 }

@@ -31,11 +31,14 @@ export 'package:tut_app/data/repository/repository_impl.dart';
 export 'package:tut_app/data/mapper/mapper.dart';
 export 'package:tut_app/data/response/response.dart';
 
+
 /// domain
 export 'package:tut_app/domain/repository/repository.dart';
 export 'package:tut_app/domain/usecase/login_usecase.dart';
 export 'package:tut_app/domain/model/models.dart';
 export 'package:tut_app/domain/usecase/base_usecase.dart';
+export 'package:tut_app/domain/usecase/register_usecase.dart';
+
 
 /// presentation
 export 'package:tut_app/presentation/resources/routes_manager.dart';

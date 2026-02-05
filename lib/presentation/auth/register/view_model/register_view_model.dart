@@ -15,6 +15,10 @@ class RegisterViewModel extends BaseViewModel
   final StreamController _allInputsValidStreamController =
       StreamController<void>.broadcast();
 
+  final RegisterUsecase _registerUsecase;
+
+  RegisterViewModel(this._registerUsecase);
+
   var registerObject = RegisterObject(
     name: '',
     mobileNumber: '',
@@ -22,6 +26,8 @@ class RegisterViewModel extends BaseViewModel
     password: '',
     profilePicture: '',
   );
+
+  // inputs Function
 
   @override
   void start() {}
@@ -33,10 +39,34 @@ class RegisterViewModel extends BaseViewModel
     _emailStreamController.close();
     _passwordStreamController.close();
     _profilePictureStreamController.close();
+    _allInputsValidStreamController.close();
     super.dispose();
   }
 
-  // inputs Function
+  @override
+  void register() async {
+    inputState.add(
+      LoadingState(stateRenderType: StateRenderType.popUpLoadingState),
+    );
+    (await _registerUsecase.execute(
+      RegisterUseCaseInput(
+        name: registerObject.name,
+        mobileNumber: registerObject.mobileNumber,
+        email: registerObject.email,
+        password: registerObject.password,
+        profilePicture: registerObject.profilePicture,
+      ),
+    )).fold(
+      (failure) {
+        inputState.add(
+          ErrorState(StateRenderType.popUpErrorState, failure.message),
+        );
+      },
+      (data) {
+        inputState.add(ContentState());
+      },
+    );
+  }
 
   @override
   void setEmailInput(String email) {
@@ -90,9 +120,6 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   Sink get allInputsValidInputs => _allInputsValidStreamController.sink;
-
-  @override
-  void login() {}
 
   //  outputs Function
 
@@ -163,7 +190,7 @@ mixin RegisterViewModelInput {
 
   void setProfilePictureInput(String profilePicture);
 
-  void login();
+  void register();
 
   Sink get inputName;
 

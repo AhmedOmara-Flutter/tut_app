@@ -15,24 +15,24 @@ class _RegisterViewState extends State<RegisterView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
 
-  final RegisterViewModel _viewModel = RegisterViewModel();
+  final RegisterViewModel _viewModel = instance<RegisterViewModel>();
 
   void _bind() {
     _viewModel.start();
     _nameController.addListener(() {
-      _viewModel.setNameInput(_nameController.text);
+      _viewModel.setNameInput(_nameController.text.trim());
     });
     _mobileNumberController.addListener(() {
-      _viewModel.setMobileNumberInput(_mobileNumberController.text);
+      _viewModel.setMobileNumberInput(_mobileNumberController.text.trim());
     });
     _emailController.addListener(() {
-      _viewModel.setEmailInput(_emailController.text);
+      _viewModel.setEmailInput(_emailController.text.trim());
     });
     _passwordController.addListener(() {
-      _viewModel.setPasswordInput(_passwordController.text);
+      _viewModel.setPasswordInput(_passwordController.text.trim());
     });
     _profilePictureController.addListener(() {
-      _viewModel.setProfilePictureInput(_profilePictureController.text);
+      _viewModel.setProfilePictureInput(_profilePictureController.text.trim());
     });
   }
 
@@ -44,9 +44,20 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    return getContentWidget();
+    return StreamBuilder<FlowState>(
+      stream: _viewModel.outputState,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return snapshot.data!.flowStateWidget(
+            context,
+            () {},
+            getContentWidget(),
+          );
+        }else{
+          return getContentWidget();
+        }
+      });
   }
-
   Widget getContentWidget() {
     return Scaffold(
       body: SingleChildScrollView(
@@ -89,6 +100,7 @@ class _RegisterViewState extends State<RegisterView> {
                         SizedBox(width: 10.0,),
                         Expanded(
                           child: TextFormField(
+                            keyboardType: TextInputType.phone,
                             controller: _mobileNumberController,
                             decoration: InputDecoration(
                               labelText: StringManager.mobileNumber,
@@ -158,7 +170,9 @@ class _RegisterViewState extends State<RegisterView> {
                     return ElevatedButton(
                       onPressed: snapshot.data == true
                           ? () {
-                              if (_formKey.currentState!.validate()) {}
+                              if (_formKey.currentState!.validate()) {
+                                _viewModel.register();
+                              }
                             }
                           : null,
 
