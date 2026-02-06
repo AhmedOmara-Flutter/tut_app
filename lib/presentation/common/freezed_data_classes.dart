@@ -13,8 +13,13 @@ abstract class RegisterObject with _$RegisterObject {
   factory RegisterObject({
     required String name,
     required String mobileNumber,
+    required String countryCode,
     required String email,
     required String password,
     required String profilePicture,
   }) = _Register;
 }
+
+
+
+//dart run build_runner build --delete-conflicting-outputs

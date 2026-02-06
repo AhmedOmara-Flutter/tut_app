@@ -11,6 +11,8 @@ class MainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        //todo    handle this
+        automaticallyImplyLeading: false,
         title: Text('Main Screen'),
       ),
 

@@ -274,7 +274,7 @@ as String,
 /// @nodoc
 mixin _$RegisterObject {
 
- String get name; String get mobileNumber; String get email; String get password; String get profilePicture;
+ String get name; String get mobileNumber; String get countryCode; String get email; String get password; String get profilePicture;
 /// Create a copy of RegisterObject
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -285,16 +285,16 @@ $RegisterObjectCopyWith<RegisterObject> get copyWith => _$RegisterObjectCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterObject&&(identical(other.name, name) || other.name == name)&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.profilePicture, profilePicture) || other.profilePicture == profilePicture));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterObject&&(identical(other.name, name) || other.name == name)&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.countryCode, countryCode) || other.countryCode == countryCode)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.profilePicture, profilePicture) || other.profilePicture == profilePicture));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,name,mobileNumber,email,password,profilePicture);
+int get hashCode => Object.hash(runtimeType,name,mobileNumber,countryCode,email,password,profilePicture);
 
 @override
 String toString() {
-  return 'RegisterObject(name: $name, mobileNumber: $mobileNumber, email: $email, password: $password, profilePicture: $profilePicture)';
+  return 'RegisterObject(name: $name, mobileNumber: $mobileNumber, countryCode: $countryCode, email: $email, password: $password, profilePicture: $profilePicture)';
 }
 
 
@@ -305,7 +305,7 @@ abstract mixin class $RegisterObjectCopyWith<$Res>  {
   factory $RegisterObjectCopyWith(RegisterObject value, $Res Function(RegisterObject) _then) = _$RegisterObjectCopyWithImpl;
 @useResult
 $Res call({
- String name, String mobileNumber, String email, String password, String profilePicture
+ String name, String mobileNumber, String countryCode, String email, String password, String profilePicture
 });
 
 
@@ -322,10 +322,11 @@ class _$RegisterObjectCopyWithImpl<$Res>
 
 /// Create a copy of RegisterObject
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? mobileNumber = null,Object? email = null,Object? password = null,Object? profilePicture = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? mobileNumber = null,Object? countryCode = null,Object? email = null,Object? password = null,Object? profilePicture = null,}) {
   return _then(_self.copyWith(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,mobileNumber: null == mobileNumber ? _self.mobileNumber : mobileNumber // ignore: cast_nullable_to_non_nullable
+as String,countryCode: null == countryCode ? _self.countryCode : countryCode // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,profilePicture: null == profilePicture ? _self.profilePicture : profilePicture // ignore: cast_nullable_to_non_nullable
@@ -414,10 +415,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  String mobileNumber,  String email,  String password,  String profilePicture)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  String mobileNumber,  String countryCode,  String email,  String password,  String profilePicture)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Register() when $default != null:
-return $default(_that.name,_that.mobileNumber,_that.email,_that.password,_that.profilePicture);case _:
+return $default(_that.name,_that.mobileNumber,_that.countryCode,_that.email,_that.password,_that.profilePicture);case _:
   return orElse();
 
 }
@@ -435,10 +436,10 @@ return $default(_that.name,_that.mobileNumber,_that.email,_that.password,_that.p
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  String mobileNumber,  String email,  String password,  String profilePicture)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  String mobileNumber,  String countryCode,  String email,  String password,  String profilePicture)  $default,) {final _that = this;
 switch (_that) {
 case _Register():
-return $default(_that.name,_that.mobileNumber,_that.email,_that.password,_that.profilePicture);case _:
+return $default(_that.name,_that.mobileNumber,_that.countryCode,_that.email,_that.password,_that.profilePicture);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -455,10 +456,10 @@ return $default(_that.name,_that.mobileNumber,_that.email,_that.password,_that.p
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  String mobileNumber,  String email,  String password,  String profilePicture)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  String mobileNumber,  String countryCode,  String email,  String password,  String profilePicture)?  $default,) {final _that = this;
 switch (_that) {
 case _Register() when $default != null:
-return $default(_that.name,_that.mobileNumber,_that.email,_that.password,_that.profilePicture);case _:
+return $default(_that.name,_that.mobileNumber,_that.countryCode,_that.email,_that.password,_that.profilePicture);case _:
   return null;
 
 }
@@ -470,11 +471,12 @@ return $default(_that.name,_that.mobileNumber,_that.email,_that.password,_that.p
 
 
 class _Register implements RegisterObject {
-   _Register({required this.name, required this.mobileNumber, required this.email, required this.password, required this.profilePicture});
+   _Register({required this.name, required this.mobileNumber, required this.countryCode, required this.email, required this.password, required this.profilePicture});
   
 
 @override final  String name;
 @override final  String mobileNumber;
+@override final  String countryCode;
 @override final  String email;
 @override final  String password;
 @override final  String profilePicture;
@@ -489,16 +491,16 @@ _$RegisterCopyWith<_Register> get copyWith => __$RegisterCopyWithImpl<_Register>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Register&&(identical(other.name, name) || other.name == name)&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.profilePicture, profilePicture) || other.profilePicture == profilePicture));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Register&&(identical(other.name, name) || other.name == name)&&(identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber)&&(identical(other.countryCode, countryCode) || other.countryCode == countryCode)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.profilePicture, profilePicture) || other.profilePicture == profilePicture));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,name,mobileNumber,email,password,profilePicture);
+int get hashCode => Object.hash(runtimeType,name,mobileNumber,countryCode,email,password,profilePicture);
 
 @override
 String toString() {
-  return 'RegisterObject(name: $name, mobileNumber: $mobileNumber, email: $email, password: $password, profilePicture: $profilePicture)';
+  return 'RegisterObject(name: $name, mobileNumber: $mobileNumber, countryCode: $countryCode, email: $email, password: $password, profilePicture: $profilePicture)';
 }
 
 
@@ -509,7 +511,7 @@ abstract mixin class _$RegisterCopyWith<$Res> implements $RegisterObjectCopyWith
   factory _$RegisterCopyWith(_Register value, $Res Function(_Register) _then) = __$RegisterCopyWithImpl;
 @override @useResult
 $Res call({
- String name, String mobileNumber, String email, String password, String profilePicture
+ String name, String mobileNumber, String countryCode, String email, String password, String profilePicture
 });
 
 
@@ -526,10 +528,11 @@ class __$RegisterCopyWithImpl<$Res>
 
 /// Create a copy of RegisterObject
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? mobileNumber = null,Object? email = null,Object? password = null,Object? profilePicture = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? mobileNumber = null,Object? countryCode = null,Object? email = null,Object? password = null,Object? profilePicture = null,}) {
   return _then(_Register(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,mobileNumber: null == mobileNumber ? _self.mobileNumber : mobileNumber // ignore: cast_nullable_to_non_nullable
+as String,countryCode: null == countryCode ? _self.countryCode : countryCode // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,profilePicture: null == profilePicture ? _self.profilePicture : profilePicture // ignore: cast_nullable_to_non_nullable

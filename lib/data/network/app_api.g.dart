@@ -52,6 +52,7 @@ class _AppServiceClient implements AppServiceClient {
   Future<AuthenticationResponse> register(
     String name,
     String mobileNumber,
+    String countryCode,
     String email,
     String password,
     String profilePicture,
@@ -62,6 +63,7 @@ class _AppServiceClient implements AppServiceClient {
     final _data = {
       'name': name,
       'mobileNumber': mobileNumber,
+      'countryCode': countryCode,
       'email': email,
       'password': password,
       'profilePicture': profilePicture,

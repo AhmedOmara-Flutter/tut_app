@@ -14,6 +14,7 @@ class RegisterUsecase implements BaseUseCase<RegisterUseCaseInput, Authenticatio
       RegisterRequest(
         name: input.name,
         mobileNumber: input.mobileNumber,
+        countryCode:input.countryCode,
         email: input.email,
         password: input.password,
         profilePicture: input.profilePicture,
@@ -25,6 +26,7 @@ class RegisterUsecase implements BaseUseCase<RegisterUseCaseInput, Authenticatio
 class RegisterUseCaseInput {
   final String name;
   final String mobileNumber;
+  final String countryCode;
   final String email;
   final String password;
   final String profilePicture;
@@ -32,6 +34,7 @@ class RegisterUseCaseInput {
   RegisterUseCaseInput({
     required this.name,
     required this.mobileNumber,
+    required this.countryCode,
     required this.email,
     required this.password,
     required this.profilePicture,

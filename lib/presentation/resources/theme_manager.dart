@@ -63,6 +63,11 @@ class ThemeManager {
           color: ColorManger.primary,
           fontSize: AppSizeManager.s14,
         ),
+        //profile picture
+        labelLarge:getRegularTextStyle(
+          color: ColorManger.grey,
+          fontSize: FontSizeManager.s16,
+        ) ,
         //body
         bodyLarge: getRegularTextStyle(
           color: ColorManger.lightGrey,
@@ -76,6 +81,10 @@ class ThemeManager {
           color: ColorManger.grey,
           fontSize: FontSizeManager.s16,
         ),
+        prefixStyle:getRegularTextStyle(
+          color: ColorManger.lightGrey,
+          fontSize: FontSizeManager.s14,
+        ) ,
         hintStyle: getRegularTextStyle(
           color: ColorManger.grey,
           fontSize: FontSizeManager.s16,

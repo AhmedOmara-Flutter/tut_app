@@ -1,3 +1,4 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:tut_app/app/app_imports.dart';
 
 
@@ -44,5 +45,6 @@ void initRegisterModule(){
   if(!GetIt.I.isRegistered<RegisterUsecase>()){
     instance.registerCachedFactory<RegisterUsecase>(()=>RegisterUsecase(instance()));
     instance.registerFactory<RegisterViewModel>(()=>RegisterViewModel(instance()));
+    instance.registerFactory<ImagePicker>(()=>ImagePicker());
   }
 }

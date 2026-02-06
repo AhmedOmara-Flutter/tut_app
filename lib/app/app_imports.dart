@@ -9,6 +9,10 @@ export 'package:lottie/lottie.dart';
 export 'dart:async';
 export 'package:flutter/scheduler.dart';
 export 'package:shared_preferences/shared_preferences.dart';
+export  'dart:io';
+export 'package:flutter_svg/svg.dart';
+export 'package:image_picker/image_picker.dart';
+export 'package:country_code_picker/country_code_picker.dart';
 
 
 /// app

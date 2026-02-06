@@ -26,6 +26,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     return await _appServiceClient.register(
       registerRequest.name,
       registerRequest.mobileNumber,
+      registerRequest.countryCode,
       registerRequest.email,
       registerRequest.password,
       registerRequest.profilePicture,

@@ -17,8 +17,12 @@ abstract class AppServiceClient {
   Future<AuthenticationResponse> register(
     @Field('name') String name,
     @Field('mobileNumber') String mobileNumber,
+    @Field('countryCode')String countryCode,
     @Field('email') String email,
     @Field('password') String password,
     @Field('profilePicture') String profilePicture,
   );
 }
+
+
+//dart run build_runner build --delete-conflicting-outputs

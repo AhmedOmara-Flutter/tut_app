@@ -11,9 +11,11 @@ class RegisterViewModel extends BaseViewModel
   final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
   final StreamController _profilePictureStreamController =
-      StreamController<String>.broadcast();
+      StreamController<File>.broadcast();
   final StreamController _allInputsValidStreamController =
       StreamController<void>.broadcast();
+  final StreamController userRegisteredSuccessfullyStreamController =
+      StreamController<bool>();
 
   final RegisterUsecase _registerUsecase;
 
@@ -22,6 +24,7 @@ class RegisterViewModel extends BaseViewModel
   var registerObject = RegisterObject(
     name: '',
     mobileNumber: '',
+    countryCode: '',
     email: '',
     password: '',
     profilePicture: '',
@@ -30,7 +33,9 @@ class RegisterViewModel extends BaseViewModel
   // inputs Function
 
   @override
-  void start() {}
+  void start() {
+    inputState.add(ContentState());
+  }
 
   @override
   void dispose() {
@@ -40,6 +45,7 @@ class RegisterViewModel extends BaseViewModel
     _passwordStreamController.close();
     _profilePictureStreamController.close();
     _allInputsValidStreamController.close();
+    userRegisteredSuccessfullyStreamController.close();
     super.dispose();
   }
 
@@ -52,6 +58,7 @@ class RegisterViewModel extends BaseViewModel
       RegisterUseCaseInput(
         name: registerObject.name,
         mobileNumber: registerObject.mobileNumber,
+        countryCode: registerObject.countryCode,
         email: registerObject.email,
         password: registerObject.password,
         profilePicture: registerObject.profilePicture,
@@ -64,6 +71,7 @@ class RegisterViewModel extends BaseViewModel
       },
       (data) {
         inputState.add(ContentState());
+        userRegisteredSuccessfullyStreamController.add(true);
       },
     );
   }
@@ -83,6 +91,12 @@ class RegisterViewModel extends BaseViewModel
   }
 
   @override
+  void setCountryCodeInput(String countryCode) {
+    registerObject = registerObject.copyWith(countryCode: countryCode);
+    allInputsValidInputs.add(null);
+  }
+
+  @override
   void setNameInput(String name) {
     inputName.add(name);
     registerObject = registerObject.copyWith(name: name);
@@ -97,9 +111,11 @@ class RegisterViewModel extends BaseViewModel
   }
 
   @override
-  void setProfilePictureInput(String profilePicture) {
+  void setProfilePictureInput(File profilePicture) {
     inputProfilePicture.add(profilePicture);
-    registerObject = registerObject.copyWith(profilePicture: profilePicture);
+    registerObject = registerObject.copyWith(
+      profilePicture: profilePicture.path,
+    );
     allInputsValidInputs.add(null);
   }
 
@@ -122,6 +138,13 @@ class RegisterViewModel extends BaseViewModel
   Sink get allInputsValidInputs => _allInputsValidStreamController.sink;
 
   //  outputs Function
+  @override
+  Stream<bool> get outPutNameValid =>
+      _nameStreamController.stream.map((name) => isNameValid(name));
+
+  @override
+  Stream<String?> get outPutNameError =>
+      outPutNameValid.map((name) => name ? null : StringManager.nameError);
 
   @override
   Stream<bool> get outPutEmailValid =>
@@ -133,18 +156,13 @@ class RegisterViewModel extends BaseViewModel
       .map((mobileNumber) => isMobileNumberValid(mobileNumber));
 
   @override
-  Stream<bool> get outPutNameValid =>
-      _nameStreamController.stream.map((name) => isNameValid(name));
-
-  @override
   Stream<bool> get outPutPasswordValid => _passwordStreamController.stream.map(
     (password) => isPasswordValid(password),
   );
 
   @override
-  Stream<bool> get outputProfilePicture => _profilePictureStreamController
-      .stream
-      .map((profilePicture) => isProfilePictureValid(profilePicture));
+  Stream<File> get outputProfilePicture =>
+      _profilePictureStreamController.stream.map((file) => file);
 
   @override
   Stream<bool> get allInputsValidOutputs =>
@@ -155,27 +173,29 @@ class RegisterViewModel extends BaseViewModel
   }
 
   bool isMobileNumberValid(String mobileNumber) {
-    return mobileNumber.isNotEmpty;
+    return mobileNumber.length >= 10 &&
+        mobileNumber.isNotEmpty &&
+        mobileNumber.contains(RegExp(StringManager.regExp));
   }
 
   bool isEmailValid(String email) {
-    return email.isNotEmpty;
+    return email.isNotEmpty && email.contains('@');
   }
 
   bool isPasswordValid(String password) {
-    return password.isNotEmpty;
+    return password.isNotEmpty && password.length >= 6;
   }
 
-  bool isProfilePictureValid(String profilePicture) {
-    return profilePicture.isNotEmpty;
+  bool isProfilePictureValid(File profilePicture) {
+    return profilePicture.path.isNotEmpty;
   }
 
   bool areAllInputsValid() {
-    return isNameValid(registerObject.name) &&
-        isMobileNumberValid(registerObject.mobileNumber) &&
-        isEmailValid(registerObject.email) &&
-        isPasswordValid(registerObject.password) &&
-        isProfilePictureValid(registerObject.profilePicture);
+    return registerObject.name.isNotEmpty &&
+        registerObject.mobileNumber.isNotEmpty &&
+        registerObject.email.isNotEmpty &&
+        registerObject.countryCode.isNotEmpty &&
+        registerObject.password.isNotEmpty;
   }
 }
 
@@ -184,11 +204,13 @@ mixin RegisterViewModelInput {
 
   void setMobileNumberInput(String mobileNumber);
 
+  void setCountryCodeInput(String countryCode);
+
   void setEmailInput(String email);
 
   void setPasswordInput(String password);
 
-  void setProfilePictureInput(String profilePicture);
+  void setProfilePictureInput(File profilePicture);
 
   void register();
 
@@ -208,13 +230,15 @@ mixin RegisterViewModelInput {
 mixin RegisterViewModelOutputs {
   Stream<bool> get outPutNameValid;
 
+  Stream<String?> get outPutNameError;
+
   Stream<bool> get outPutMobileNumberValid;
 
   Stream<bool> get outPutEmailValid;
 
   Stream<bool> get outPutPasswordValid;
 
-  Stream<bool> get outputProfilePicture;
+  Stream<File> get outputProfilePicture;
 
   Stream<bool> get allInputsValidOutputs;
 }

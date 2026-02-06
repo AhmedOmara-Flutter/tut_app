@@ -7,6 +7,8 @@ class ImageAssets {
   static const String onBoardingLogo3 = '$_imagePath/onBoardingLogo3.png';
   static const String onBoardingLogo4 = '$_imagePath/onBoardingLogo4.png';
   static const String egyptFlag = '$_imagePath/egyptFlag.png';
+  static const String photoCameraIc = '$_imagePath/photo_camera_ic.svg';
+
 }
 
 class JsonAssets{

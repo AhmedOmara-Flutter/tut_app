@@ -35,6 +35,10 @@ dependencies:
   get_it: ^9.2.0
   lottie: ^3.3.2
   shared_preferences: ^2.5.4
+  flutter_svg: ^2.2.3
+  image_picker: ^1.2.1
+  country_code_picker: ^3.4.1
+
 
 
 
